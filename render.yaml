@@ -1,0 +1,20 @@
+services:
+  - name: plone-site
+    type: web
+    env: docker
+    plan: free  # Change if needed
+    repo: https://github.com/append08/HRDC-render-Plone
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: ADMIN_USER
+        value: admin
+      - key: ADMIN_PASSWORD
+        value: admin123
+      - key: SITE_TITLE
+        value: "My Plone Site"
+      - key: VOLTO_API_PATH
+        value: "http://localhost:8080/Plone"
+    disk:
+      name: plone-data
+      mountPath: /data
+      sizeGB: 1
