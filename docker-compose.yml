@@ -1,0 +1,25 @@
+version: '3'
+services:
+  backend:
+    image: plone/plone-backend:6.0
+    container_name: plone_backend
+    environment:
+      SITE_ID: Plone
+      SITE_TITLE: "My Plone Site"
+      ADMIN_USER: admin
+      ADMIN_PASSWORD: admin123
+      ADDONS: ""
+    ports:
+      - "8080:8080"
+
+  frontend:
+    image: node:20
+    container_name: volto_frontend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    command: yarn start
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
